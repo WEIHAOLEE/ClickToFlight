@@ -34,7 +34,7 @@ public class SearchActivity extends AppCompatActivity {
 
 
 
-        // editText get focus and open the keyboard  获取焦点并调出键盘 c
+        // editText get focus and open the keyboard  获取焦点并调出键盘
         et_search.setFocusable(true);
         et_search.setFocusableInTouchMode(true);
         et_search.requestFocus();

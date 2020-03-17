@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
+                    getSupportFragmentManager().beginTransaction().hide(meFragment).commit();
                     return true;
                 case R.id.navigation_me:
                     mTextMessage.setText(R.string.title_me);

@@ -3,6 +3,7 @@ package com.sky.clicktoflight;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -24,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
     private Drawable drawable_search;
     private ImmersionBarUtils immersionBarUtils;
 
+
+    // fragement
+    private MeFragment meFragment;
+    private FragmentManager fManager;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -41,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_me:
                     mTextMessage.setText(R.string.title_me);
+                    meFragment = new MeFragment("👴成功了");
+//                    fManager.beginTransaction().add(R.id.fragment_content,meFragment);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content,meFragment).show(meFragment).commit();
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.mainview,fragment1).show(fragment1).commit();
                     return true;
                 case R.id.navigation_shopping_cart:
                     mTextMessage.setText(R.string.title_shopping_cart);

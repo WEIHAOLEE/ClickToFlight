@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background"
-    android:padding="20dp">
+    >
 
     <RelativeLayout
-        android:layout_marginTop="30dp"
+        android:id="@+id/rl_profile_photo"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -42,6 +45,18 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/rl_profile_shape"
+        android:layout_marginTop="-45dp"
+        android:background="@drawable/profile_main_shape">
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_profile_shape"
+        android:layout_below="@id/rl_profile_photo"
         android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,6 +64,8 @@
         android:paddingTop="10dp"
         android:paddingRight="15dp"
         android:paddingBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/profile_view_round">
 
 
@@ -62,6 +79,8 @@
     </RelativeLayout>
 
 
+
+
     <TextView
         android:id="@+id/tv_fm"
         android:layout_width="match_parent"
@@ -70,4 +89,4 @@
         android:textSize="30sp"
         android:textColor="#000000"
         android:gravity="center"/>
-</LinearLayout>
+</RelativeLayout>

@@ -21,11 +21,7 @@ import com.sky.clicktoflight.utils.ImmersionBarUtils;
 public class MainActivity extends AppCompatActivity {
 
 
-    private Toolbar tb_1;
     private TextView mTextMessage;
-    private TextView tv_search;
-    private Drawable drawable_search;
-    private ImmersionBarUtils immersionBarUtils;
 
 
     // fragement
@@ -73,13 +69,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener searchListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent search_intent = new Intent(getApplicationContext(),SearchActivity.class);
-            startActivity(search_intent);
-        }
-    };
     private HomeFragment homeFragment;
 
 

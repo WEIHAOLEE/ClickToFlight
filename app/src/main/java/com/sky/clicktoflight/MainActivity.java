@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
-                    homeFragment = new HomeFragment();
-                    transaction.add(R.id.fragment_content,homeFragment);
+//                    homeFragment = new HomeFragment();
+//                    transaction.add(R.id.fragment_content,homeFragment);
                     transaction.show(homeFragment);
                     transaction.commit();
                     return true;
@@ -98,10 +98,19 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        setDefaultFragment();
 
     }
 
 
+    private void setDefaultFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        homeFragment = new HomeFragment();
+        transaction.add(R.id.fragment_content,homeFragment);
+        transaction.show(homeFragment);
+        transaction.commit();
+    }
     private void hideFragment(FragmentTransaction transaction) {
         if (meFragment != null) {
             transaction.hide(meFragment);

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -13,7 +14,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.gyf.immersionbar.ImmersionBar;
+import com.sky.clicktoflight.View.HomeFragment;
+import com.sky.clicktoflight.View.MeFragment;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +37,16 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            hideFragment(transaction);
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     mTextMessage.setText(R.string.title_home);
+                    homeFragment = new HomeFragment();
+                    transaction.add(R.id.fragment_content,homeFragment);
+                    transaction.show(homeFragment);
+                    transaction.commit();
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
@@ -49,8 +58,11 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_me:
                     mTextMessage.setText(R.string.title_me);
                     meFragment = new MeFragment("👴成功了");
+                    transaction.add(R.id.fragment_content,meFragment);
+                    transaction.show(meFragment);
+                    transaction.commit();
 //                    fManager.beginTransaction().add(R.id.fragment_content,meFragment);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content,meFragment).show(meFragment).commit();
+//                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content,meFragment).show(meFragment).commit();
 //                    getSupportFragmentManager().beginTransaction().replace(R.id.mainview,fragment1).show(fragment1).commit();
                     return true;
                 case R.id.navigation_shopping_cart:
@@ -68,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(search_intent);
         }
     };
+    private HomeFragment homeFragment;
 
 
     @Override
@@ -79,24 +92,25 @@ public class MainActivity extends AppCompatActivity {
 //
 
 
-        immersionBarUtils = new ImmersionBarUtils();
-        immersionBarUtils.ImmersionBarUtil(this,R.id.view_bar);
+
 
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
-        tv_search = findViewById(R.id.tv_search);
-        drawable_search = getResources().getDrawable(R.drawable.ic_search_dark_gray_24dp);
-
-
-        drawable_search.setBounds(17, 3, 67, 55);
-        tv_search.setCompoundDrawables(drawable_search, null, null ,null);
-
-        tv_search.setOnClickListener(searchListener);
-
-
     }
 
+
+    private void hideFragment(FragmentTransaction transaction) {
+        if (meFragment != null) {
+            transaction.hide(meFragment);
+        }
+        if (homeFragment != null){
+            transaction.hide(homeFragment);
+        }
+//        if (mUserPageFragment != null){
+//            transaction.hide(mUserPageFragment);
+//        }
+    }
 }

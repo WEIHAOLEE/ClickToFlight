@@ -1,4 +1,4 @@
-package com.sky.clicktoflight;
+package com.sky.clicktoflight.View;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.sky.clicktoflight.R;
 
 public class MeFragment extends Fragment {
     private String content;

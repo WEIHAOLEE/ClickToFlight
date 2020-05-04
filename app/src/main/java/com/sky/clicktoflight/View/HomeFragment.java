@@ -12,11 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.gyf.immersionbar.components.ImmersionFragment;
 import com.sky.clicktoflight.R;
 import com.sky.clicktoflight.SearchActivity;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends ImmersionFragment {
 
     private TextView tv_search;
     private Drawable drawable_search;
@@ -31,8 +32,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void initView(View view) {
-        immersionBarUtils = new ImmersionBarUtils();
-        immersionBarUtils.ImmersionBarUtil(getActivity(),R.id.view_bar);
+
 
         tv_search = view.findViewById(R.id.tv_search);
         drawable_search = view.getResources().getDrawable(R.drawable.ic_search_dark_gray_24dp);
@@ -51,4 +51,10 @@ public class HomeFragment extends Fragment {
             startActivity(search_intent);
         }
     };
+
+    @Override
+    public void initImmersionBar() {
+        immersionBarUtils = new ImmersionBarUtils();
+        immersionBarUtils.ImmersionBarUtilFragment(this,R.id.view_bar);
+    }
 }

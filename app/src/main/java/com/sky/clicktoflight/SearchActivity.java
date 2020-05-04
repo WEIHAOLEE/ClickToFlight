@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.EditText;
-import android.widget.TextView;
 
-import com.gyf.immersionbar.ImmersionBar;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
 public class SearchActivity extends AppCompatActivity {
@@ -23,7 +21,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         immersionBarUtils = new ImmersionBarUtils();
-        immersionBarUtils.ImmersionBarUtil(this,R.id.view_bar);
+        immersionBarUtils.ImmersionBarUtilActivity(this,R.id.view_bar);
 
         et_search = findViewById(R.id.et_search);
         drawable_search = getResources().getDrawable(R.drawable.ic_search_dark_gray_24dp);

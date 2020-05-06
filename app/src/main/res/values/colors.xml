@@ -6,4 +6,5 @@
     <color name="nav_color">#609DFF</color>
     <color name="nav_color2">#E0E0E0</color>
     <color name="background">#F1F1F1</color>
+    <color name="indicatorNormal">#95686868</color>
 </resources>

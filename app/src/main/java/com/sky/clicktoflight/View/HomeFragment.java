@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import com.sky.clicktoflight.SearchActivity;
 import com.sky.clicktoflight.View.adapter.ImageBannerAdapter;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 import com.youth.banner.Banner;
+import com.youth.banner.indicator.CircleIndicator;
 
 public class HomeFragment extends ImmersionFragment {
 
@@ -66,5 +68,10 @@ public class HomeFragment extends ImmersionFragment {
         Banner banner = view.findViewById(R.id.banner);
         banner.setAdapter(new ImageBannerAdapter(BannerDataBean.getImageData()));
         banner.setDelayTime(5000);
+        banner.setBannerRound2(20);
+        // indicator 指示器 就是轮播图下面那两个圆圆的东西
+        banner.setIndicator(new CircleIndicator(view.getContext()));
+        banner.setIndicatorSelectedColorRes(R.color.colorAccent);
+        banner.setIndicatorNormalColorRes(R.color.indicatorNormal);
     }
 }

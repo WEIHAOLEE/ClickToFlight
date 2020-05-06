@@ -13,9 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.gyf.immersionbar.components.ImmersionFragment;
+import com.sky.clicktoflight.Bean.BannerDataBean;
 import com.sky.clicktoflight.R;
 import com.sky.clicktoflight.SearchActivity;
+import com.sky.clicktoflight.View.adapter.ImageBannerAdapter;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
+import com.youth.banner.Banner;
 
 public class HomeFragment extends ImmersionFragment {
 
@@ -28,6 +31,7 @@ public class HomeFragment extends ImmersionFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
+        useBanner(view);
         return view;
     }
 
@@ -56,5 +60,11 @@ public class HomeFragment extends ImmersionFragment {
     public void initImmersionBar() {
         immersionBarUtils = new ImmersionBarUtils();
         immersionBarUtils.ImmersionBarUtilFragment(this,R.id.view_bar);
+    }
+
+    public void useBanner(View view){
+        Banner banner = view.findViewById(R.id.banner);
+        banner.setAdapter(new ImageBannerAdapter(BannerDataBean.getImageData()));
+        banner.setDelayTime(5000);
     }
 }

@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    // 设置默认Fragment
     private void setDefaultFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -100,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.show(homeFragment);
         transaction.commit();
     }
+    // 隐藏Fragment方法
     private void hideFragment(FragmentTransaction transaction) {
         if (meFragment != null) {
             transaction.hide(meFragment);

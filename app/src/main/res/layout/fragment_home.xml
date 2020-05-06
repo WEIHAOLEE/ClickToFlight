@@ -36,4 +36,9 @@ android:background="@color/background">
 
     </androidx.appcompat.widget.Toolbar>
 
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_below="@id/tb_1"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"/>
 </RelativeLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp">
+  <TextView
+        android:id="@+id/tv_dep_time"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:text="11:00"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"/>
+    <TextView
+        android:id="@+id/tv_flight_time"
+        android:layout_toEndOf="@id/tv_dep_time"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="24h24m"
+        android:textSize="13sp"/>
+    <TextView
+        android:id="@+id/tv_arr_time"
+        android:layout_toEndOf="@id/tv_flight_time"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:text="11:00"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/tv_dep_airport"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/tv_dep_time"
+        android:text="首都机场"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_arr_airport"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/tv_arr_time"
+        android:layout_toEndOf="@id/tv_flight_time"
+        android:text="首都机场"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/tv_dep_airport"
+        android:gravity="center"
+        android:text="CA2333"
+        android:textSize="13sp"/>
+
+
+</RelativeLayout>

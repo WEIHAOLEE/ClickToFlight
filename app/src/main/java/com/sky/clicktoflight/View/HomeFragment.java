@@ -12,6 +12,8 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyf.immersionbar.components.ImmersionFragment;
 import com.sky.clicktoflight.Bean.BannerDataBean;
@@ -27,6 +29,7 @@ public class HomeFragment extends ImmersionFragment {
     private TextView tv_search;
     private Drawable drawable_search;
     private ImmersionBarUtils immersionBarUtils;
+    private RecyclerView mRvFlightList;
 
     @Nullable
     @Override
@@ -34,7 +37,13 @@ public class HomeFragment extends ImmersionFragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
         useBanner(view);
+        setRecycleview(view);
         return view;
+    }
+
+    private void setRecycleview(View view) {
+        mRvFlightList = view.findViewById(R.id.rv_flight_list);
+        mRvFlightList.setLayoutManager(new LinearLayoutManager(view.getContext()));
     }
 
     private void initView(View view) {

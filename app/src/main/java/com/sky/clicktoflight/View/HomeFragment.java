@@ -17,33 +17,49 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gyf.immersionbar.components.ImmersionFragment;
 import com.sky.clicktoflight.Bean.BannerDataBean;
+import com.sky.clicktoflight.Bean.FlightDataBean;
+import com.sky.clicktoflight.IContract;
+import com.sky.clicktoflight.Presenter.PresenterImpl;
 import com.sky.clicktoflight.R;
 import com.sky.clicktoflight.SearchActivity;
+import com.sky.clicktoflight.View.adapter.FlightListRecycleviewAdapter;
 import com.sky.clicktoflight.View.adapter.ImageBannerAdapter;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 
-public class HomeFragment extends ImmersionFragment {
+import java.util.List;
+
+public class HomeFragment extends ImmersionFragment implements IContract.IView {
 
     private TextView tv_search;
     private Drawable drawable_search;
     private ImmersionBarUtils immersionBarUtils;
     private RecyclerView mRvFlightList;
+    private List<FlightDataBean> mFlightDataList;
+    private PresenterImpl presenter;
+    private View mView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        initView(view);
-        useBanner(view);
-        setRecycleview(view);
-        return view;
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
+        initView(mView);
+        useBanner(mView);
+        //调用p层得到数据
+        presenter = new PresenterImpl(this);
+        presenter.getFlightDataList();
+        return mView;
     }
+    @Override
+    public void setRecycleview(List<FlightDataBean> flightDataBeansList) {
+        mRvFlightList = mView.findViewById(R.id.rv_flight_list);
 
-    private void setRecycleview(View view) {
-        mRvFlightList = view.findViewById(R.id.rv_flight_list);
-        mRvFlightList.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
+        mRvFlightList.setLayoutManager(new LinearLayoutManager(mView.getContext()));
+        FlightListRecycleviewAdapter adapter = new FlightListRecycleviewAdapter(flightDataBeansList);
+        mRvFlightList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void initView(View view) {
@@ -83,4 +99,5 @@ public class HomeFragment extends ImmersionFragment {
         banner.setIndicatorSelectedColorRes(R.color.colorAccent);
         banner.setIndicatorNormalColorRes(R.color.indicatorNormal);
     }
+
 }

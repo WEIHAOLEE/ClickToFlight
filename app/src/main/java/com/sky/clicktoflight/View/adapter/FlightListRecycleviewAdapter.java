@@ -71,7 +71,8 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
             String flightNum = dataBean.getFlightCompany() + dataBean.getFlightNum();
             mTvFlightNum.setText(flightNum);
             mTvOnTime.setText(dataBean.getOnTime());
-            mTvPrice.setText(dataBean.getPrice());
+            String price = "¥" + dataBean.getPrice();
+            mTvPrice.setText(price);
 
         }
     }

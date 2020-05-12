@@ -49,10 +49,11 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
         private final TextView mTvFlightNum;
         private final TextView mTvOnTime;
         private final TextView mTvPrice;
+        private final TextView mTvFlightTime;
 
         public InnerHodler(@NonNull View itemView) {
             super(itemView);
-//            TextView mTvFlightTime = itemView.findViewById(R.id.tv_flight_time);
+            mTvFlightTime = itemView.findViewById(R.id.tv_flight_time);
             mTvArrTime = itemView.findViewById(R.id.tv_arr_time);
             mTvArrAirport = itemView.findViewById(R.id.tv_arr_airport);
             mTvDepAirPort = itemView.findViewById(R.id.tv_dep_airport);
@@ -70,9 +71,12 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
             mTvDepTime.setText(dataBean.getDepTime());
             String flightNum = dataBean.getFlightCompany() + dataBean.getFlightNum();
             mTvFlightNum.setText(flightNum);
-            mTvOnTime.setText(dataBean.getOnTime());
+            String onTime = "On Time: " + dataBean.getOnTime();
+            mTvOnTime.setText(onTime);
             String price = "¥" + dataBean.getPrice();
             mTvPrice.setText(price);
+            String flightTime = dataBean.getFlightTime() + " Hours";
+            mTvFlightTime.setText(flightTime);
 
         }
     }

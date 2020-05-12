@@ -15,13 +15,13 @@
     <TextView
         android:id="@+id/tv_flight_time"
         android:layout_toEndOf="@id/tv_dep_time"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="60dp"
         android:layout_height="20dp"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:text="24h24m"
+        android:text="24 Hours"
         android:textSize="13sp"/>
     <TextView
         android:id="@+id/tv_arr_time"
@@ -79,7 +79,7 @@
       android:layout_width="80dp"
       android:layout_height="30dp"
       android:layout_toEndOf="@id/tv_arr_time"
-      android:layout_marginLeft="50dp"
+      android:layout_marginLeft="30dp"
       android:text="¥9999"
       android:textSize="21sp"
       android:textStyle="bold"

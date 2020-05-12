@@ -10,8 +10,9 @@ public class FlightDataBean {
     private String arrAirport;
     private String onTime;
     private int price;
+    private int flightTime;
 
-    public FlightDataBean(int flightNum, String flightCompany, String planeModel, String depTime, String depAirport, String arrTime, String arrAirport, String onTime, int price) {
+    public FlightDataBean(int flightNum, String flightCompany, String planeModel, String depTime, String depAirport, String arrTime, String arrAirport, String onTime, int price, int flightTime) {
         this.flightNum = flightNum;
         this.flightCompany = flightCompany;
         this.planeModel = planeModel;
@@ -21,6 +22,7 @@ public class FlightDataBean {
         this.arrAirport = arrAirport;
         this.onTime = onTime;
         this.price = price;
+        this.flightTime = flightTime;
     }
 
     @Override
@@ -35,7 +37,16 @@ public class FlightDataBean {
                 ", arrAirport='" + arrAirport + '\'' +
                 ", onTime='" + onTime + '\'' +
                 ", price=" + price +
+                ", flightTime=" + flightTime +
                 '}';
+    }
+
+    public int getFlightTime() {
+        return flightTime;
+    }
+
+    public void setFlightTime(int flightTime) {
+        this.flightTime = flightTime;
     }
 
     public FlightDataBean() {

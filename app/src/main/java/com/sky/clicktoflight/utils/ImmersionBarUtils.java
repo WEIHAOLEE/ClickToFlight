@@ -13,12 +13,14 @@ public class ImmersionBarUtils {
         ImmersionBar.with(fragment)
                 .statusBarView(viewID)
                 .statusBarDarkFont(true)
+                .transparentNavigationBar()
                 .init();
     }
     public void ImmersionBarUtilActivity(Activity activity, int viewID) {
         ImmersionBar.with(activity)
                 .statusBarView(viewID)
                 .statusBarDarkFont(true)
+                .transparentNavigationBar()
                 .init();
     }
 }

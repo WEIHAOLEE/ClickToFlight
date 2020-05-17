@@ -16,9 +16,6 @@
         <activity
             android:name=".SearchActivity"
             android:windowSoftInputMode="stateVisible|adjustResize"></activity>
-        <activity
-            android:name=".test"
-            android:label="@string/title_activity_test" />
         <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

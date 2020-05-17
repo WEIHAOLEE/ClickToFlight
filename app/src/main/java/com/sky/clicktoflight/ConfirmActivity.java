@@ -7,14 +7,14 @@ import android.widget.RelativeLayout;
 
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
-public class Testa extends AppCompatActivity {
+public class ConfirmActivity extends AppCompatActivity {
 
     private RelativeLayout rl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_boading_pass);
+        setContentView(R.layout.activity_confirm);
         ImmersionBarUtils immersionBarUtils = new ImmersionBarUtils();
         immersionBarUtils.ImmersionBarUtilActivity(this,R.id.view_bar);
     }

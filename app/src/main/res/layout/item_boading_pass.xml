@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <!--解决状态栏与toolbar重叠问题-->
+    <View
+        android:id="@+id/view_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFFFFF" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tb_1"
+        android:layout_below="@+id/view_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        app:title="Confirm"
+        app:titleTextColor="#000000"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/rl_boarding_pass"
+        android:layout_below="@id/tb_1"
+        android:layout_marginTop="50dp"
+        android:layout_width="345dp"
+        android:layout_height="171dp"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/boading">
+
+        <TextView
+            android:layout_width="115dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="29dp"
+            android:layout_marginLeft="37dp"
+            android:text="BOARDING PASS"
+            android:textStyle="bold"
+            android:textColor="#ff000000"
+            android:textSize="15sp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_pass_name_of"
+            android:layout_width="94dp"
+            android:layout_height="14dp"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="47dp"
+            android:text="Name of passenger"
+            android:textStyle="bold"
+            android:textColor="#ff000000"
+            android:textSize="10sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_pass_flight"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginLeft="51dp"
+            android:layout_marginTop="47dp"
+            android:layout_toEndOf="@id/tv_pass_name_of"
+            android:text="Flight"
+            android:textColor="#ff000000"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tv_pass_name"
+            android:layout_width="59dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="61dp"
+            android:layout_marginLeft="37dp"
+            android:text="Tom Lee"
+            android:textColor="#ff000000"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_pass_flight_num"
+            android:layout_toEndOf="@id/tv_pass_name_of"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginTop="61dp"
+            android:layout_marginLeft="51dp"
+            android:text="CA 114 10A"
+            android:textColor="#ff000000"
+            android:textSize="14sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="78dp"
+            android:text="From"
+            android:textStyle="bold"
+            android:textColor="#ff000000"
+            android:textSize="10sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_pass_dep_time"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_toEndOf="@id/tv_pass_name_of"
+            android:layout_marginLeft="51dp"
+            android:layout_marginTop="78dp"
+            android:text="Dep Time"
+            android:textStyle="bold"
+            android:textColor="#ff000000"
+            android:textSize="10sp"
+            />
+        <TextView
+            android:id="@+id/tv_pass_dep_airport"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="92dp"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:text="ZBAA"
+            android:textColor="#ff000000"
+            android:textSize="14sp"
+            />
+        <TextView
+            android:id="@+id/tv_pass_dep_time_clock"
+            android:layout_toEndOf="@id/tv_pass_name_of"
+            android:layout_marginLeft="51dp"
+            android:layout_marginTop="92dp"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:text="10 : 50"
+            android:textColor="#ff000000"
+            android:textSize="14sp"
+            />
+        <TextView
+            android:layout_width="13dp"
+            android:layout_height="14dp"
+            android:layout_marginTop="109dp"
+            android:layout_marginLeft="37dp"
+            android:text="To"
+            android:textStyle="bold"
+            android:textColor="#ff000000"
+            android:textSize="10sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_pass_arr_time"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_toEndOf="@id/tv_pass_name_of"
+            android:layout_marginTop="109dp"
+            android:layout_marginLeft="51dp"
+            android:text="Arr Time"
+            android:textStyle="bold"
+            android:textColor="#ff000000"
+            android:textSize="10sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginTop="123dp"
+            android:layout_marginLeft="37dp"
+            android:text="ZSPD"
+            android:textColor="#ff000000"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_toEndOf="@id/tv_pass_name_of"
+            android:layout_marginTop="123dp"
+            android:layout_marginLeft="51dp"
+            android:text="12 : 50"
+            android:textColor="#ff000000"
+            android:textSize="14sp"
+            />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_pass_info"
+        android:layout_below="@id/rl_boarding_pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000000"
+        android:text="————This is your booking information————"/>
+
+    <RelativeLayout
+        android:id="@+id/rv_pass_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_pass_info"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/boarding_information"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/tv_pass_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#000000"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_pass_ticket_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_pass_price"
+            android:layout_marginLeft="20dp"
+            android:text="The ticket price:"
+            android:textSize="16dp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/tv_pass_ticket_price_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_pass_price"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="30dp"
+            android:text="¥550"
+            android:textSize="16dp"
+            android:textColor="#FF1744"/>
+
+
+        <TextView
+            android:id="@+id/tv_pass_fuel_surcharge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_pass_ticket_price"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Fuel surcharge:"
+            android:textSize="16dp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/tv_pass_fuel_surcharge_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_pass_ticket_price_num"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:text="¥50"
+            android:textSize="16dp"
+            android:textColor="#FF1744"/>
+
+        <TextView
+            android:id="@+id/tv_pass_price_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_pass_fuel_surcharge"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Total:"
+            android:textSize="16dp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/tv_pass_price_total_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_pass_fuel_surcharge_num"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:text="¥600"
+            android:textSize="16dp"
+            android:textColor="#FF1744"/>
+
+        <Button
+            android:id="@+id/bt_book"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/bt_reservation"
+            android:layout_marginBottom="10dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/boarding_book_round"
+            android:text="book now"/>
+        <Button
+            android:id="@+id/bt_reservation"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/boarding_reservation_round"
+            android:text="reservation and book after 2 hours"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

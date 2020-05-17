@@ -45,6 +45,7 @@ android:background="@color/background">
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"/>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_flight_list"
         android:layout_below="@id/banner"

@@ -4,7 +4,7 @@ public interface AirportDao {
 
     void icaoQuery(String airportName);
 
-    void airportQuery(String icao);
+    String airportQuery(String icao);
 
     void insert();
 }

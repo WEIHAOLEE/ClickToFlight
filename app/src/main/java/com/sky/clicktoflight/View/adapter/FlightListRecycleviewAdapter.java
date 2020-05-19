@@ -1,5 +1,7 @@
 package com.sky.clicktoflight.View.adapter;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -8,16 +10,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sky.clicktoflight.Bean.FlightDataBean;
+import com.sky.clicktoflight.DIY.AwesomeTextView;
+import com.sky.clicktoflight.IContract;
+import com.sky.clicktoflight.Model.DAO.AirportDaoImpl;
+import com.sky.clicktoflight.Presenter.PresenterImpl;
 import com.sky.clicktoflight.R;
+import com.sky.clicktoflight.View.HomeFragment;
 
 import java.util.List;
 
 public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightListRecycleviewAdapter.InnerHodler> {
 
     private final List<FlightDataBean> mFlightData;
+    private final Context viewContext;
+//    private final IContract.IView view;
 
-    public FlightListRecycleviewAdapter(List<FlightDataBean> mFlightData) {
+    public FlightListRecycleviewAdapter(List<FlightDataBean> mFlightData, Context context) {
         this.mFlightData = mFlightData;
+        this.viewContext = context;
     }
 
     @NonNull
@@ -30,6 +40,8 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
     @Override
     public void onBindViewHolder(@NonNull InnerHodler holder, int position) {
         holder.setData(mFlightData.get(position));
+        Log.d("fuck you", String.valueOf(holder.mTvArrAirport.getFocusable()));
+
     }
 
     @Override
@@ -40,11 +52,11 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
         return 0;
     }
 
-    public class InnerHodler extends RecyclerView.ViewHolder {
+    public class InnerHodler extends RecyclerView.ViewHolder{
 
         private final TextView mTvArrTime;
-        private final TextView mTvArrAirport;
-        private final TextView mTvDepAirPort;
+        private final AwesomeTextView mTvArrAirport;
+        private final AwesomeTextView mTvDepAirPort;
         private final TextView mTvDepTime;
         private final TextView mTvFlightNum;
         private final TextView mTvOnTime;
@@ -65,9 +77,17 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
         }
 
         public void setData(FlightDataBean dataBean){
-            mTvArrAirport.setText(dataBean.getArrAirport());
+            // bad code logic
+            String arrAirport = dataBean.getArrAirport();
+            String depAirport = dataBean.getDepAirport();
+            AirportDaoImpl dao = new AirportDaoImpl(viewContext);
+            String depAirportName = dao.airportQuery(depAirport);
+            String arrAirportName = dao.airportQuery(arrAirport);
+//            String setArrAirportName = view.setAirportName(arrAirport);
+            mTvArrAirport.setText(arrAirportName);
+//            mTvArrAirport.setText(setArrAirportName);
             mTvArrTime.setText(dataBean.getArrTime());
-            mTvDepAirPort.setText(dataBean.getDepAirport());
+            mTvDepAirPort.setText(depAirportName);
             mTvDepTime.setText(dataBean.getDepTime());
             String flightNum = dataBean.getFlightCompany() + dataBean.getFlightNum();
             mTvFlightNum.setText(flightNum);

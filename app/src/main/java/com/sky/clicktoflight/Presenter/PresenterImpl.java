@@ -1,6 +1,7 @@
 package com.sky.clicktoflight.Presenter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
@@ -10,6 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sky.clicktoflight.Bean.FlightDataBean;
 import com.sky.clicktoflight.IContract;
+import com.sky.clicktoflight.Model.DAO.AirportDaoImpl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,6 +31,7 @@ public class PresenterImpl implements IContract.IPresenter {
     public PresenterImpl(IContract.IView view) {
         this.view = view;
     }
+
 
     @SuppressLint("HandlerLeak")
     @Override
@@ -58,6 +61,13 @@ public class PresenterImpl implements IContract.IPresenter {
             }
         };
     }
+
+    @Override
+    public String airportGet(Context context, String icao) {
+        AirportDaoImpl airportDao = new AirportDaoImpl(context);
+        return airportDao.airportQuery(icao);
+    }
+
 
     private void requestData() throws IOException {
         String parpreUrl = "http://47.101.190.152:8080/appServer/findFlight";

@@ -33,7 +33,7 @@ public class AirportDaoImpl implements AirportDao{
     }
 
     @Override
-    public void airportQuery(String icao) {
+    public String airportQuery(String icao) {
         SQLiteDatabase db = mDatabaseHelper.getWritableDatabase();
         String sql = "select AIRPORT_NAME from " + Constants.TABLE_NAME_AIRPODR + " where ICAO like ?";
         Cursor cursor = db.rawQuery(sql, new String[]{icao});
@@ -41,9 +41,11 @@ public class AirportDaoImpl implements AirportDao{
             int index = cursor.getColumnIndex("AIRPORT_NAME");
             String airportName = cursor.getString(index);
             Log.d("print airport name : ", airportName);
+            return airportName;
         }
         cursor.close();
         db.close();
+        return null;
     }
 
     @Override

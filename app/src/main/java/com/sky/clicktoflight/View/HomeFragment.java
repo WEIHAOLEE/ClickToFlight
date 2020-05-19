@@ -51,15 +51,21 @@ public class HomeFragment extends ImmersionFragment implements IContract.IView {
         presenter.getFlightDataList();
         return mView;
     }
+
+
     @Override
     public void setRecycleview(List<FlightDataBean> flightDataBeansList) {
         mRvFlightList = mView.findViewById(R.id.rv_flight_list);
-
-
         mRvFlightList.setLayoutManager(new LinearLayoutManager(mView.getContext()));
-        FlightListRecycleviewAdapter adapter = new FlightListRecycleviewAdapter(flightDataBeansList);
+        FlightListRecycleviewAdapter adapter = new FlightListRecycleviewAdapter(flightDataBeansList,mView.getContext());
         mRvFlightList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public String setAirportName(String icaoAirport) {
+
+        return presenter.airportGet(mView.getContext(),icaoAirport);
     }
 
     private void initView(View view) {

@@ -23,11 +23,20 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
 
     private final List<FlightDataBean> mFlightData;
     private final Context viewContext;
+    private OnClickListener mOnClickListener;
 //    private final IContract.IView view;
 
     public FlightListRecycleviewAdapter(List<FlightDataBean> mFlightData, Context context) {
         this.mFlightData = mFlightData;
         this.viewContext = context;
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener){
+        this.mOnClickListener = onClickListener;
+    }
+
+    public interface OnClickListener{
+        void onClick(int position);
     }
 
     @NonNull
@@ -38,9 +47,15 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
     }
 
     @Override
-    public void onBindViewHolder(@NonNull InnerHodler holder, int position) {
+    public void onBindViewHolder(@NonNull InnerHodler holder, final int position) {
         holder.setData(mFlightData.get(position));
-        Log.d("fuck you", String.valueOf(holder.mTvArrAirport.getFocusable()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnClickListener.onClick(position);
+            }
+        });
+
 
     }
 
@@ -55,8 +70,8 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
     public class InnerHodler extends RecyclerView.ViewHolder{
 
         private final TextView mTvArrTime;
-        private final AwesomeTextView mTvArrAirport;
-        private final AwesomeTextView mTvDepAirPort;
+        private final TextView mTvArrAirport;
+        private final TextView mTvDepAirPort;
         private final TextView mTvDepTime;
         private final TextView mTvFlightNum;
         private final TextView mTvOnTime;

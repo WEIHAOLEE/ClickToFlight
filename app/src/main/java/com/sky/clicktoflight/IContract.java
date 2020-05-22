@@ -17,14 +17,19 @@ public interface IContract {
 
     }
 
+    interface IPresenterSearch{
+        void getFlightDataBy(String flightInfo);
+    }
+
     interface IView{
 
         void setRecycleview(List<FlightDataBean> flightDataBeansList);
 
         String setAirportName(String icaoAirport);
-        interface IViewAdapter{
+    }
 
-        }
+    interface IViewSearch{
+        void setRecyclerview(List<FlightDataBean> flightDataBeanList);
     }
     interface IModel{
 

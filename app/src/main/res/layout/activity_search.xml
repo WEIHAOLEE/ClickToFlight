@@ -33,9 +33,17 @@
             android:textColorHint="#2E2E2E"
             android:drawableLeft="@drawable/ic_search_dark_gray_24dp"
             android:drawablePadding="10dp"
-            android:gravity="center_vertical"/>
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:imeOptions="actionSearch"/>
 
     </androidx.appcompat.widget.Toolbar>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_flight_list"
+        android:layout_below="@id/banner"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

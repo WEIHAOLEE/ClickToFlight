@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gyf.immersionbar.components.ImmersionFragment;
 import com.sky.clicktoflight.Bean.BannerDataBean;
 import com.sky.clicktoflight.Bean.FlightDataBean;
+import com.sky.clicktoflight.FlightInfoActivity;
 import com.sky.clicktoflight.IContract;
 import com.sky.clicktoflight.Presenter.PresenterImpl;
 import com.sky.clicktoflight.R;
@@ -28,6 +29,7 @@ import com.sky.clicktoflight.utils.ImmersionBarUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.indicator.CircleIndicator;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class HomeFragment extends ImmersionFragment implements IContract.IView {
@@ -54,12 +56,21 @@ public class HomeFragment extends ImmersionFragment implements IContract.IView {
 
 
     @Override
-    public void setRecycleview(List<FlightDataBean> flightDataBeansList) {
+    public void setRecycleview(final List<FlightDataBean> flightDataBeansList) {
         mRvFlightList = mView.findViewById(R.id.rv_flight_list);
         mRvFlightList.setLayoutManager(new LinearLayoutManager(mView.getContext()));
         FlightListRecycleviewAdapter adapter = new FlightListRecycleviewAdapter(flightDataBeansList,mView.getContext());
         mRvFlightList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        adapter.setOnClickListener(new FlightListRecycleviewAdapter.OnClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(mView.getContext(), FlightInfoActivity.class);
+                FlightDataBean flightDataBean = flightDataBeansList.get(position);
+                intent.putExtra("flightData", (Serializable) flightDataBean);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

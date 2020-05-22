@@ -1,6 +1,8 @@
 package com.sky.clicktoflight.Bean;
 
-public class FlightDataBean {
+import java.io.Serializable;
+
+public class FlightDataBean implements Serializable {
     private int flightNum;
     private String flightCompany;
     private String planeModel;

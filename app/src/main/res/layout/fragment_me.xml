@@ -6,9 +6,16 @@
     android:background="@color/background"
     >
 
+    <View
+        android:id="@+id/view_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFFFFF" />
+
     <RelativeLayout
+        android:layout_below="@id/view_bar"
         android:id="@+id/rl_profile_photo"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_width="wrap_content"

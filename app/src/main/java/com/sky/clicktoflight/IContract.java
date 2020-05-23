@@ -21,6 +21,10 @@ public interface IContract {
         void getFlightDataBy(String flightInfo);
     }
 
+    interface IPresenterReg{
+        void register(String uid, String uPwd);
+    }
+
     interface IView{
 
         void setRecycleview(List<FlightDataBean> flightDataBeansList);

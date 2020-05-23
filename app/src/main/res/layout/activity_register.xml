@@ -27,15 +27,13 @@
 
 
     <!--TODO: 写他妈的自定义控件 来实现圆形图片展示-->
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_user_photo"
         android:layout_below="@id/tb_1"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:scaleType="centerInside"
-        android:background="@drawable/profile_photo_round"
         android:src="@drawable/profile_photo"/>
 
 

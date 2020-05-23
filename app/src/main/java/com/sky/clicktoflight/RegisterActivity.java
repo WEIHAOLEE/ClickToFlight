@@ -32,11 +32,12 @@ import com.yalantis.ucrop.UCropActivity;
 import java.io.File;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.EasyPermissions;
 
 public class RegisterActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
 
-    private ImageView mIvUserPhoto;
+    private CircleImageView mIvUserPhoto;
     private EditText mEtId;
     private EditText mEtPwd;
     private EditText mEtPwdConfirm;

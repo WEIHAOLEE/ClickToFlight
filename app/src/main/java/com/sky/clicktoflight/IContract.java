@@ -22,7 +22,7 @@ public interface IContract {
     }
 
     interface IPresenterReg{
-        void register(String uid, String uPwd);
+        void register(String uid, String uPwd, String uImage);
     }
 
     interface IView{

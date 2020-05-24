@@ -8,12 +8,14 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,13 +25,18 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.util.Util;
+import com.sky.clicktoflight.Presenter.PresenterRegImpl;
 import com.sky.clicktoflight.utils.GetPhotoFromPhotoAlbum;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 import com.sky.clicktoflight.utils.MyMD5Util;
+import com.sky.clicktoflight.utils.StringAndBitmao;
 import com.yalantis.ucrop.UCrop;
 import com.yalantis.ucrop.UCropActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -43,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity implements EasyPermissio
     private EditText mEtPwdConfirm;
     private Button mBtRegister;
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+    private String userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +75,21 @@ public class RegisterActivity extends AppCompatActivity implements EasyPermissio
         }else if(requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK){
             Uri uri = UCrop.getOutput(data);
             mIvUserPhoto.setImageURI(uri);
+            // 通过加载流的方式将uri转换为bitmap
+            Bitmap bitmap = null;
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(),uri);
+//                bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //封装一下方法
+            userImage = StringAndBitmao.bitmapToString(bitmap);
+            // 压缩质量为60% 输出到out
+            // 是否有使用base64的必要 // 必要的
+            // 生词base64
 //            Uri clipImage = data.getData();
 //            mIvUserPhoto.setImageURI(clipImage);
         }
@@ -120,10 +143,10 @@ public class RegisterActivity extends AppCompatActivity implements EasyPermissio
             @Override
             public void onClick(View v) {
                 // TODO: 图片
-                String uId = mEtId.getText().toString().trim();
+                String uName = mEtId.getText().toString().trim();
                 String uPwd = mEtPwd.getText().toString().trim();
                 String uPwdConfirm = mEtPwdConfirm.getText().toString().trim();
-                if (!TextUtils.isEmpty(uId) && !TextUtils.isEmpty(uPwd) && !TextUtils.isEmpty(uPwdConfirm)){
+                if (!TextUtils.isEmpty(uName) && !TextUtils.isEmpty(uPwd) && !TextUtils.isEmpty(uPwdConfirm)){
                     if (!uPwd.equals(uPwdConfirm)){
                         Toast.makeText(getApplicationContext(),"The two passwords do not match",Toast.LENGTH_SHORT).show();
                     }else {
@@ -131,7 +154,8 @@ public class RegisterActivity extends AppCompatActivity implements EasyPermissio
                         // 加密
                         MyMD5Util myMD5Util = new MyMD5Util();
                         String uPwdEnc = myMD5Util.encrypt(uPwd);
-
+                        PresenterRegImpl presenterReg = new PresenterRegImpl();
+                        presenterReg.register(uName,uPwdEnc,userImage);
                     }
                 }else {
                     Toast.makeText(getApplicationContext(),"You have not entered", Toast.LENGTH_SHORT).show();

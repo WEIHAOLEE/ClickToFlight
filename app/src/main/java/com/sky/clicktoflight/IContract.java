@@ -35,6 +35,10 @@ public interface IContract {
     interface IViewSearch{
         void setRecyclerview(List<FlightDataBean> flightDataBeanList);
     }
+
+    interface IViewReg{
+        void finishActivity();
+    }
     interface IModel{
 
     }

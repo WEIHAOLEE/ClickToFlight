@@ -42,7 +42,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class RegisterActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
+public class RegisterActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks, IContract.IViewReg {
 
     private CircleImageView mIvUserPhoto;
     private EditText mEtId;
@@ -154,7 +154,7 @@ public class RegisterActivity extends AppCompatActivity implements EasyPermissio
                         // 加密
                         MyMD5Util myMD5Util = new MyMD5Util();
                         String uPwdEnc = myMD5Util.encrypt(uPwd);
-                        PresenterRegImpl presenterReg = new PresenterRegImpl();
+                        PresenterRegImpl presenterReg = new PresenterRegImpl(RegisterActivity.this);
                         presenterReg.register(uName,uPwdEnc,userImage);
                     }
                 }else {
@@ -191,5 +191,13 @@ public class RegisterActivity extends AppCompatActivity implements EasyPermissio
     @Override
     public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
         Toast.makeText(this,"Please agree permissions, otherwise the function can't be used ", Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * 成功注册 presenter层调用 关闭注册页面
+     */
+    @Override
+    public void finishActivity() {
+        finish();
     }
 }

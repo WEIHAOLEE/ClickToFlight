@@ -22,6 +22,11 @@ import okhttp3.ResponseBody;
 
 public class PresenterRegImpl implements IContract.IPresenterReg {
     private static final String TAG =  PresenterRegImpl.class.getName();
+    private final IContract.IViewReg view;
+
+    public PresenterRegImpl(IContract.IViewReg view) {
+        this.view = view;
+    }
 
     @Override
     public void register(String uid, String uPwd, String uImage) {
@@ -53,7 +58,11 @@ public class PresenterRegImpl implements IContract.IPresenterReg {
                 if (code == HttpURLConnection.HTTP_OK) {
                     ResponseBody responseBody = response.body();
                     if (responseBody != null) {
-                        Log.d(TAG,"result -->" + responseBody);
+                        // .string()方法只能用一次
+                        String responseString = responseBody.string();
+                        if (responseString.equals("1\n")){
+                            view.finishActivity();
+                        }
                     }
                 }
             }

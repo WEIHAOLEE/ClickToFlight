@@ -20,6 +20,11 @@ import okhttp3.ResponseBody;
 
 public class PresenterLoginImpl implements IContract.IPresenterLogin {
     private static final String TAG = PresenterLoginImpl.class.getName();
+    private final IContract.IViewLogin view;
+
+    public PresenterLoginImpl(IContract.IViewLogin view) {
+        this.view = view;
+    }
 
     @Override
     public void login(String uid, String uPwd) {
@@ -54,6 +59,7 @@ public class PresenterLoginImpl implements IContract.IPresenterLogin {
                 ResponseBody responseBody = response.body();
                 String string = responseBody.string();
                 Log.d(TAG,"response --> " + string);
+                view.saveUserData(string);
             }
         });
 

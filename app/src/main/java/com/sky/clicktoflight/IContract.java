@@ -42,6 +42,10 @@ public interface IContract {
     interface IViewReg{
         void finishActivity();
     }
+
+    interface IViewLogin{
+        void saveUserData(String response);
+    }
     interface IModel{
 
     }

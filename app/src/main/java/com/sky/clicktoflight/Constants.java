@@ -5,4 +5,5 @@ public class Constants {
     public static final String DATABASE_NAME = "airport_dict.db";
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_NAME_AIRPODR = "AIRPORT";
+    public static final String SERVER_BASE_URL = "http://47.101.190.152:8080";
 }

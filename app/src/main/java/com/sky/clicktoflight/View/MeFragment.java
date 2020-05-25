@@ -58,4 +58,11 @@ public class MeFragment extends Fragment {
             startActivity(intent);
         }
     };
+
+
+    // TODO: 读取sp 查看是否登有登录状态
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 }

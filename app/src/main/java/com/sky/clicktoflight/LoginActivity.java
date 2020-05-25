@@ -3,17 +3,23 @@ package com.sky.clicktoflight;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Looper;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.sky.clicktoflight.Bean.UserBean;
 import com.sky.clicktoflight.Presenter.PresenterLoginImpl;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 import com.sky.clicktoflight.utils.MyMD5Util;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements IContract.IViewLogin {
 
     private Button mBtRegister;
     private Button mBtLogin;
@@ -38,13 +44,15 @@ public class LoginActivity extends AppCompatActivity {
         mBtLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 需要有个判断
+
                 String uId = mEtUid.getText().toString().trim();
                 String pwd = mEtUpwd.getText().toString().trim();
-
-                String uPwd = MyMD5Util.encrypt(pwd);
-                PresenterLoginImpl presenterLogin = new PresenterLoginImpl();
-                presenterLogin.login(uId,uPwd);
+                // 判断
+                if (!TextUtils.isEmpty(uId) && !TextUtils.isEmpty(pwd)) {
+                    String uPwd = MyMD5Util.encrypt(pwd);
+                    PresenterLoginImpl presenterLogin = new PresenterLoginImpl(LoginActivity.this);
+                    presenterLogin.login(uId,uPwd);
+                }
             }
         });
         mBtRegister.setOnClickListener(new View.OnClickListener() {
@@ -54,5 +62,28 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void saveUserData(String response) {
+        Gson gson = new Gson();
+        // 判断是否正确返回 密码用户是否存在
+        if (response.equals("\"null\"\n")) {
+            // 因为okHttp异步请求不再主线程 无法直接弹toast
+            // 用looper包一下
+            Looper.prepare();
+            Toast.makeText(getApplicationContext(),"Account information error",Toast.LENGTH_SHORT).show();
+            Looper.loop();
+        }else {
+            UserBean userBean = gson.fromJson(response, UserBean.class);
+            SharedPreferences sp = getSharedPreferences("userData", MODE_PRIVATE);
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putInt("uId",userBean.getuId());
+            edit.putString("uName",userBean.getuName());
+            edit.putString("uPwd",userBean.getuPwd());
+            edit.putString("imagePath",userBean.getImagePath());
+            edit.commit();
+            finish();
+        }
     }
 }

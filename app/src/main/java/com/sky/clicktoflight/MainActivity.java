@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sky.clicktoflight.View.HomeFragment;
 import com.sky.clicktoflight.View.MeFragment;
+import com.sky.clicktoflight.utils.CheckLoginStatus;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -91,6 +92,10 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         setDefaultFragment();
+
+        CheckLoginStatus checkLoginStatus = new CheckLoginStatus(this);
+        // 检查是否登录 并设置常量
+        checkLoginStatus.getSharedPreferences();
 
     }
 

@@ -21,11 +21,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_pf_photo"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@drawable/profile_photo_round" />
+            android:background="@drawable/profile_photo_round"
+            android:src="@drawable/profile_photo"/>
 
         <TextView
             android:id="@+id/tv_username"

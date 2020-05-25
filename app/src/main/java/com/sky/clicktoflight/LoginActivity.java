@@ -76,8 +76,9 @@ public class LoginActivity extends AppCompatActivity implements IContract.IViewL
             Looper.loop();
         }else {
             UserBean userBean = gson.fromJson(response, UserBean.class);
-            SharedPreferences sp = getSharedPreferences("userData", MODE_PRIVATE);
+            SharedPreferences sp = getSharedPreferences(Constants.SP_USER_DATA, MODE_PRIVATE);
             SharedPreferences.Editor edit = sp.edit();
+            edit.putBoolean("loginStatus", true);
             edit.putInt("uId",userBean.getuId());
             edit.putString("uName",userBean.getuName());
             edit.putString("uPwd",userBean.getuPwd());

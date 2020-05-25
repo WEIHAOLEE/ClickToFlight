@@ -1,7 +1,10 @@
 package com.sky.clicktoflight.View;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.sky.clicktoflight.Constants;
 import com.sky.clicktoflight.LoginActivity;
 import com.sky.clicktoflight.R;
+import com.sky.clicktoflight.utils.CheckLoginStatus;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MeFragment extends Fragment {
     private String content;
     private View view;
-    private ImageView mIvPhoto;
+    private CircleImageView mIvPhoto;
     private TextView mTvUsername;
     private TextView mTvUserId;
 
@@ -49,20 +57,36 @@ public class MeFragment extends Fragment {
         mTvUsername.setOnClickListener(profileOnClickListener);
         mTvUserId = view.findViewById(R.id.tv_userid);
         mTvUserId.setOnClickListener(profileOnClickListener);
+        if (Constants.LOGIN_STATUS){
+            mTvUserId.setText(String.valueOf(Constants.USER_ID));
+            mTvUsername.setText(Constants.USER_NAME);
+            Glide.with(view).load(Constants.IMAGE_PATH).into(mIvPhoto);
+        }
     }
     private View.OnClickListener profileOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             // TODO: 判断登录状态 未登录则跳转登录页面 登录则不操作）
-            Intent intent = new Intent(view.getContext(), LoginActivity.class);
-            startActivity(intent);
+            if (Constants.LOGIN_STATUS){
+                Log.d("Login ", "already login");
+            }else {
+                Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
         }
     };
 
+    // 不应该放到fragment里
 
     // TODO: 读取sp 查看是否登有登录状态
     @Override
     public void onResume() {
+        Log.d("MeFragment","onResume被调用了");
+        if (!Constants.LOGIN_STATUS){
+            CheckLoginStatus checkLoginStatus = new CheckLoginStatus(getActivity());
+            // 检查是否登录 并设置常量
+            checkLoginStatus.getSharedPreferences();
+        }
         super.onResume();
     }
 }

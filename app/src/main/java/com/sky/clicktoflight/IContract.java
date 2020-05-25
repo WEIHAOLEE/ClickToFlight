@@ -25,6 +25,9 @@ public interface IContract {
         void register(String uid, String uPwd, String uImage);
     }
 
+    interface IPresenterLogin{
+        void login(String uid, String uPwd);
+    }
     interface IView{
 
         void setRecycleview(List<FlightDataBean> flightDataBeansList);

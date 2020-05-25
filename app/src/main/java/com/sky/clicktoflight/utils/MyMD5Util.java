@@ -6,7 +6,7 @@ public class MyMD5Util {
     //盐，用于混交md5
     private static final String slat = "&%5123***&&%%$$#@";
 
-    public String encrypt(String dataStr) {
+    public static String encrypt(String dataStr) {
         try {
             dataStr = dataStr + slat;
             MessageDigest m = MessageDigest.getInstance("MD5");

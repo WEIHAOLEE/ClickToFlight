@@ -152,8 +152,8 @@ public class RegisterActivity extends AppCompatActivity implements EasyPermissio
                     }else {
                         // TODO: 提交注册申请
                         // 加密
-                        MyMD5Util myMD5Util = new MyMD5Util();
-                        String uPwdEnc = myMD5Util.encrypt(uPwd);
+
+                        String uPwdEnc = MyMD5Util.encrypt(uPwd);
                         PresenterRegImpl presenterReg = new PresenterRegImpl(RegisterActivity.this);
                         presenterReg.register(uName,uPwdEnc,userImage);
                     }

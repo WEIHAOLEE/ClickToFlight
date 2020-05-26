@@ -2,11 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sky.clicktoflight">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--读写内存块权限-->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 读写内存块权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <!--调用相机权限-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 调用相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -17,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".FlightInfoActivity" />
         <activity android:name=".ConfirmActivity" />
@@ -35,7 +34,7 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

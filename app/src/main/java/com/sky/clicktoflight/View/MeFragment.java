@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.sky.clicktoflight.Constants;
 import com.sky.clicktoflight.LoginActivity;
+import com.sky.clicktoflight.ProfileActivity;
 import com.sky.clicktoflight.R;
 import com.sky.clicktoflight.utils.CheckLoginStatus;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
@@ -57,18 +59,16 @@ public class MeFragment extends Fragment {
         mTvUsername.setOnClickListener(profileOnClickListener);
         mTvUserId = view.findViewById(R.id.tv_userid);
         mTvUserId.setOnClickListener(profileOnClickListener);
-        if (Constants.LOGIN_STATUS){
-            mTvUserId.setText(String.valueOf(Constants.USER_ID));
-            mTvUsername.setText(Constants.USER_NAME);
-            Glide.with(view).load(Constants.IMAGE_PATH).into(mIvPhoto);
-        }
+
     }
     private View.OnClickListener profileOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // TODO: 判断登录状态 未登录则跳转登录页面 登录则不操作）
+            // TODO: 判断登录状态 未登录则跳转登录页面 登录则跳转到用户详情页？）
             if (Constants.LOGIN_STATUS){
                 Log.d("Login ", "already login");
+                Intent intent = new Intent(view.getContext(), ProfileActivity.class);
+                startActivity(intent);
             }else {
                 Intent intent = new Intent(view.getContext(), LoginActivity.class);
                 startActivity(intent);
@@ -86,6 +86,18 @@ public class MeFragment extends Fragment {
             CheckLoginStatus checkLoginStatus = new CheckLoginStatus(getActivity());
             // 检查是否登录 并设置常量
             checkLoginStatus.getSharedPreferences();
+            // 如果还是等于空 那就清空信息
+            if (!Constants.LOGIN_STATUS){
+                mTvUserId.setText("UserID");
+                mTvUsername.setText("UserName");
+                mIvPhoto.setImageResource(R.drawable.profile_photo);
+            }
+
+        }
+        if (Constants.LOGIN_STATUS){
+            mTvUserId.setText(String.valueOf(Constants.USER_ID));
+            mTvUsername.setText(Constants.USER_NAME);
+            Glide.with(view).load(Constants.IMAGE_PATH).into(mIvPhoto);
         }
         super.onResume();
     }

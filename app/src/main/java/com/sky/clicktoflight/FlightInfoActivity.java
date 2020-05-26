@@ -4,17 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.NumberPicker;
+import android.widget.ScrollView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.sky.clicktoflight.Bean.FlightDataBean;
 import com.sky.clicktoflight.DIY.AwesomeTextView;
+import com.sky.clicktoflight.DIY.CustomNPDialog;
 import com.sky.clicktoflight.Model.DAO.AirportDaoImpl;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
-import java.io.Serializable;
-
-public class FlightInfoActivity extends AppCompatActivity {
+public class FlightInfoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImmersionBarUtils immersionBarUtils;
     private TextView mTvDepTime;
@@ -28,6 +34,8 @@ public class FlightInfoActivity extends AppCompatActivity {
     private TextView mTvPlaneModelNum;
     private TextView mTvOnTimeNum;
     private TextView mTvPriceNum;
+    private ScrollView mScrollView;
+    private Button mBtChooseSeat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +82,25 @@ public class FlightInfoActivity extends AppCompatActivity {
         mTvPlaneModelNum = findViewById(R.id.tv_plane_model_num);
         mTvOnTimeNum = findViewById(R.id.tv_on_time_num);
         mTvPriceNum = findViewById(R.id.tv_price_num);
+        mScrollView = findViewById(R.id.scroll_view);
+        mBtChooseSeat = findViewById(R.id.bt_choose_seat);
+        mBtChooseSeat.setOnClickListener(this);
+    }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.bt_choose_seat:
+                String[] seatWords = {"A","B","C","D","E","F"};
+                // 此处不能依赖getapplicationcontext 需要写this
+                CustomNPDialog dialog = new CustomNPDialog(this, 68, 0, seatWords, new CustomNPDialog.OnInputFinishedListener() {
+                    @Override
+                    public void inputeFinished(String seat) {
+                        Toast.makeText(getApplicationContext(),seat,Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog.show();
+        }
     }
 }

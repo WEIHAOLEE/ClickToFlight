@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/boarding_information"
+        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <NumberPicker
+                android:id="@+id/np_seat_num"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp">
+
+            </NumberPicker>
+
+            <NumberPicker
+                android:id="@+id/np_seat_word"
+                android:layout_toEndOf="@id/np_seat_num"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp">
+            </NumberPicker>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/bt_dialog_confirm"
+            android:layout_marginTop="20dp"
+            android:text="Confirm"
+            android:background="@drawable/boarding_book_round"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/ll_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+</FrameLayout>

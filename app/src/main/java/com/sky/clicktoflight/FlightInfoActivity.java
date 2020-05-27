@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.gyf.immersionbar.ImmersionBar;
 import com.sky.clicktoflight.Bean.FlightDataBean;
 import com.sky.clicktoflight.DIY.AwesomeTextView;
 import com.sky.clicktoflight.DIY.CustomNPDialog;
@@ -36,6 +38,22 @@ public class FlightInfoActivity extends AppCompatActivity implements View.OnClic
     private TextView mTvPriceNum;
     private ScrollView mScrollView;
     private Button mBtChooseSeat;
+    private CustomNPDialog dialog;
+    private String chooseSeat;
+    private TextView mTvSeatValue;
+    private String mArrAirportName;
+    private String mDepAirportName;
+    private String mArrAirport;
+    private String mDepAirport;
+    private String mArrTime;
+    private String mDepTime;
+    private String mFlightNum;
+    private String mFlightTime;
+    private String mOnTime;
+    private String mPlaneModel;
+    private String mprice;
+    private FlightDataBean flightData;
+    private Button mBtConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +65,33 @@ public class FlightInfoActivity extends AppCompatActivity implements View.OnClic
 
     private void initData() {
         Intent intent = getIntent();
-        FlightDataBean flightData = (FlightDataBean) intent.getSerializableExtra("flightData");
-        String arrAirport = flightData.getArrAirport();
-        String depAirport = flightData.getDepAirport();
+        flightData = (FlightDataBean) intent.getSerializableExtra("flightData");
+        mArrAirport = flightData.getArrAirport();
+        mDepAirport = flightData.getDepAirport();
+        mArrTime = flightData.getArrTime();
+        mDepTime = flightData.getDepTime();
+        mFlightNum = flightData.getFlightCompany() + flightData.getFlightNum();
+        mFlightTime = flightData.getFlightTime() + " Hours";
+        mOnTime = flightData.getOnTime();
+        mPlaneModel = flightData.getPlaneModel();
+        mprice = "¥" + flightData.getPrice();
         AirportDaoImpl dao = new AirportDaoImpl(this);
-        String arrAirportName = dao.airportQuery(arrAirport);
-        String depAirportName = dao.airportQuery(depAirport);
-        mTvDepValue.setText(depAirportName);
-        mTvArrValue.setText(arrAirportName);
-        mTvArrAirport.setText(arrAirport);
-        mTvArrTime.setText(flightData.getArrTime());
-        mTvDepAirport.setText(depAirport);
-        mTvDepTime.setText(flightData.getDepTime());
-        mTvFlightNum.setText(flightData.getFlightCompany() + flightData.getFlightNum());
-        String flightTime =flightData.getFlightTime() + " Hours";
-        mTvFlightTime.setText(flightTime);
-        mTvOnTimeNum.setText(flightData.getOnTime());
-        mTvPlaneModelNum.setText(flightData.getPlaneModel());
-        mTvPriceNum.setText("¥" + flightData.getPrice());
+        mArrAirportName = dao.airportQuery(mArrAirport);
+        mDepAirportName = dao.airportQuery(mDepAirport);
+
+
+
+        mTvDepValue.setText(mDepAirportName);
+        mTvArrValue.setText(mArrAirportName);
+        mTvArrAirport.setText(mArrAirport);
+        mTvArrTime.setText(mArrTime);
+        mTvDepAirport.setText(mDepAirport);
+        mTvDepTime.setText(mDepTime);
+        mTvFlightNum.setText(mFlightNum);
+        mTvFlightTime.setText(mFlightTime);
+        mTvOnTimeNum.setText(mOnTime);
+        mTvPlaneModelNum.setText(mPlaneModel);
+        mTvPriceNum.setText(mprice);
 
     }
 
@@ -84,7 +111,10 @@ public class FlightInfoActivity extends AppCompatActivity implements View.OnClic
         mTvPriceNum = findViewById(R.id.tv_price_num);
         mScrollView = findViewById(R.id.scroll_view);
         mBtChooseSeat = findViewById(R.id.bt_choose_seat);
+        mBtConfirm = findViewById(R.id.bt_confirm);
         mBtChooseSeat.setOnClickListener(this);
+        mBtConfirm.setOnClickListener(this);
+        mTvSeatValue = findViewById(R.id.tv_seat_value);
     }
 
 
@@ -94,13 +124,43 @@ public class FlightInfoActivity extends AppCompatActivity implements View.OnClic
             case R.id.bt_choose_seat:
                 String[] seatWords = {"A","B","C","D","E","F"};
                 // 此处不能依赖getapplicationcontext 需要写this
-                CustomNPDialog dialog = new CustomNPDialog(this, 68, 0, seatWords, new CustomNPDialog.OnInputFinishedListener() {
+
+                dialog = new CustomNPDialog(this, 68, 0, seatWords, new CustomNPDialog.OnInputFinishedListener() {
                     @Override
                     public void inputeFinished(String seat) {
                         Toast.makeText(getApplicationContext(),seat,Toast.LENGTH_SHORT).show();
+                        chooseSeat = seat;
+                        mTvSeatValue.setText(chooseSeat);
                     }
                 });
                 dialog.show();
+                ImmersionBar.with(this, dialog).init();
+                break;
+            case R.id.bt_confirm:
+                Intent intent = new Intent(getApplicationContext(),ConfirmActivity.class);
+                intent.putExtra("arrAirport",mArrAirport);
+                intent.putExtra("depAirport",mDepAirport);
+                intent.putExtra("arrTime",mArrTime);
+                intent.putExtra("depTime",mDepTime);
+                intent.putExtra("flightNum",mFlightNum);
+                intent.putExtra("flightTime",mFlightTime);
+                intent.putExtra("onTime",mOnTime);
+                intent.putExtra("planeModel",mPlaneModel);
+                intent.putExtra("price",String.valueOf(flightData.getPrice()));
+                intent.putExtra("seat",chooseSeat);
+                startActivity(intent);
+                break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        ImmersionBar.with(this,dialog);
+        super.onDestroy();
     }
 }

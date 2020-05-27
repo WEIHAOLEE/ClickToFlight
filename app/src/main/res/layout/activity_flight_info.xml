@@ -104,7 +104,7 @@
         android:layout_marginBottom="15dp"/>
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:id="@+id/scroll_view"
         android:overScrollMode="always"
         android:fillViewport="true">
@@ -261,20 +261,41 @@
                 android:layout_height="40dp"
                 android:layout_below="@id/tv_price_num"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="20dp"
                 android:text="Choose Seat"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/boarding_book_round"/>
+
+            <TextView
+                android:id="@+id/tv_seat"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_below="@id/bt_choose_seat"
+                android:text="Your Seat:"
+                android:textSize="16sp"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/tv_seat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/bt_choose_seat"
+                android:text="___"
+                android:textSize="16sp"
+                android:textColor="#000000"/>
 
             <Button
                 android:id="@+id/bt_confirm"
                 android:layout_width="300dp"
                 android:layout_height="40dp"
-                android:layout_below="@id/bt_choose_seat"
+                android:layout_below="@id/tv_seat"
+                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:text="Confirm"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/boarding_book_round"/>
+
 
         </RelativeLayout>
     </ScrollView>

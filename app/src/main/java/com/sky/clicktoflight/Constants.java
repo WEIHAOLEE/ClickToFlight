@@ -11,4 +11,5 @@ public class Constants {
     public static String USER_NAME = "";
     public static int USER_ID = 0;
     public static String IMAGE_PATH = "";
+    public static final String ACTION_RESEVATION_NOTIFICATION = "com.sky.clicktoflight_RESEVATION_NOTIFICATION";
 }

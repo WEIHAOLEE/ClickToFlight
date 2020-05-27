@@ -2,15 +2,24 @@ package com.sky.clicktoflight;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.sky.clicktoflight.BroadcastReceiver.AlarmReceiver;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
 public class ConfirmActivity extends AppCompatActivity {
 
+    private static final String TAG = ConfirmActivity.class.getName();
     private RelativeLayout rl;
     private TextView mTvArrTime;
     private TextView mTvDepTime;
@@ -28,6 +37,8 @@ public class ConfirmActivity extends AppCompatActivity {
     private String price;
     private String seat;
     private int ticketPrice;
+    private Button mBtBook;
+    private Button mBtReservation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +46,29 @@ public class ConfirmActivity extends AppCompatActivity {
         setContentView(R.layout.activity_confirm);
         initView();
         initData();
+        setOnClickListener();
 
+    }
+
+    private void setOnClickListener() {
+        mBtReservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 获得alarmManager 服务对象
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                // new intent
+                Intent intent = new Intent();
+                intent.setAction(Constants.ACTION_RESEVATION_NOTIFICATION);
+                intent.setComponent(new ComponentName("com.sky.clicktoflight","com.sky.clicktoflight.BroadcastReceiver.AlarmReceiver"));
+
+                 // 设置pendingIntent 启动广播
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, 0);
+                Log.d(TAG,"设置intent");
+
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 3000, pendingIntent);
+                Log.d(TAG, "设置alarmManager");
+            }
+        });
     }
 
     private void initData() {
@@ -70,6 +103,9 @@ public class ConfirmActivity extends AppCompatActivity {
         mTvTotalPrice = findViewById(R.id.tv_pass_price_total_num);
         mTvTicketPrice = findViewById(R.id.tv_pass_ticket_price_num);
         mTvPassName = findViewById(R.id.tv_pass_name);
+
+        mBtBook = findViewById(R.id.bt_book);
+        mBtReservation = findViewById(R.id.bt_reservation);
 
     }
 

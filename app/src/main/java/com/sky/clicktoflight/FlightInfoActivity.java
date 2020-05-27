@@ -160,7 +160,9 @@ public class FlightInfoActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     protected void onDestroy() {
-        ImmersionBar.with(this,dialog);
+        if (dialog != null){
+            ImmersionBar.with(this,dialog);
+        }
         super.onDestroy();
     }
 }

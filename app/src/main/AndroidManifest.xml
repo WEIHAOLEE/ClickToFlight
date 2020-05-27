@@ -36,6 +36,11 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <receiver android:name=".BroadcastReceiver.AlarmReceiver" android:process=":newinst">
+            <intent-filter>
+                <action android:name="com.sky.clicktoflight_RESEVATION_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

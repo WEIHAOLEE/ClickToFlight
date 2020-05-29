@@ -16,10 +16,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sky.clicktoflight.View.HomeFragment;
 import com.sky.clicktoflight.View.MeFragment;
+import com.sky.clicktoflight.View.ShoppingCartFragment;
 import com.sky.clicktoflight.utils.CheckLoginStatus;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
@@ -49,25 +51,21 @@ public class MainActivity extends AppCompatActivity {
                     transaction.show(homeFragment);
                     transaction.commit();
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);
                     getSupportFragmentManager().beginTransaction().hide(meFragment).commit();
                     return true;
                 case R.id.navigation_me:
                     mTextMessage.setText(R.string.title_me);
-                    meFragment = new MeFragment("👴成功了");
-                    transaction.add(R.id.fragment_content,meFragment);
+                    if (meFragment == null){
+                        meFragment = new MeFragment("👴成功了");
+                        transaction.add(R.id.fragment_content,meFragment);
+                    }
                     transaction.show(meFragment);
                     transaction.commit();
 //                    fManager.beginTransaction().add(R.id.fragment_content,meFragment);
 //                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_content,meFragment).show(meFragment).commit();
 //                    getSupportFragmentManager().beginTransaction().replace(R.id.mainview,fragment1).show(fragment1).commit();
-                    return true;
-                case R.id.navigation_shopping_cart:
-                    mTextMessage.setText(R.string.title_shopping_cart);
                     return true;
             }
             return false;
@@ -75,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private HomeFragment homeFragment;
+    private ShoppingCartFragment shoppingCartFragment;
 
 
     @Override

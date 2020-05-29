@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -67,12 +68,26 @@ public class ConfirmActivity extends AppCompatActivity {
 
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 3000, pendingIntent);
                 Log.d(TAG, "设置alarmManager");
+
+                SharedPreferences sp = getSharedPreferences(Constants.USER_NAME + "Book", MODE_PRIVATE);
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putString("arrAirport",arrAirport);
+                edit.putString("depAirport",depAirport);
+                edit.putString("arrTime",arrTime);
+                edit.putString("depTime",depTime);
+                edit.putString("flightNum",flightNum);
+                edit.putString("price",price);
+                edit.putString("seat",seat);
+                edit.commit();
+
+
             }
         });
     }
 
     private void initData() {
         Intent intent = getIntent();
+        // TODO： 做一个判断 看从那过来的数据 或者在recycler准备好数据
         arrAirport = intent.getStringExtra("arrAirport");
         depAirport = intent.getStringExtra("depAirport");
         arrTime = intent.getStringExtra("arrTime");

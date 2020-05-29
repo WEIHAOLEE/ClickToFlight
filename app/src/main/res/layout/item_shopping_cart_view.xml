@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_list_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="30dp"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/tv_dep_time"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:text="11:00"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/tv_arr_time"
+        android:layout_toEndOf="@id/tv_dep_time"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:text="11:00"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:id="@+id/tv_dep_airport"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/tv_dep_time"
+        android:text="首都机场"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/tv_arr_airport"
+        android:layout_width="70dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@id/tv_arr_time"
+        android:layout_toEndOf="@id/tv_dep_airport"
+        android:text="首都机场11111111111111111111"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:textColor="#000000"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:textSize="14sp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/tv_flight_num"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@id/tv_arr_airport"
+        android:layout_below="@id/tv_arr_time"
+        android:gravity="center"
+        android:text="CA2333"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
+        android:layout_toEndOf="@id/tv_arr_time"
+        android:layout_marginLeft="20dp"
+        android:text="¥9999"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#FF1744"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toEndOf="@id/tv_price"
+        android:background="@drawable/boarding_book_round"
+        android:text="Buy"/>
+</RelativeLayout>

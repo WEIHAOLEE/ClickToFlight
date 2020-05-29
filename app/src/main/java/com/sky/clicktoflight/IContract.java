@@ -28,6 +28,12 @@ public interface IContract {
     interface IPresenterLogin{
         void login(String uid, String uPwd);
     }
+    interface IPresenterOrder{
+
+        void getPayOrderList();
+
+        void getPaidOrderList();
+    }
     interface IView{
 
         void setRecycleview(List<FlightDataBean> flightDataBeansList);

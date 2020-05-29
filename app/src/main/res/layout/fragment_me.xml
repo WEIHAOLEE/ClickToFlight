@@ -74,14 +74,25 @@
         android:paddingBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:gravity="center"
         android:background="@drawable/profile_view_round">
 
 
         <TextView
+            android:id="@+id/tv_pay_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ic_payment_black_24dp"
+            android:text="Pay Order"
+            android:textColor="#000000"/>
+        <TextView
+            android:id="@+id/tv_paid_order"
+            android:layout_toEndOf="@id/tv_pay_order"
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@drawable/ic_my_order_black_24dp"
-            android:text="My Order"
+            android:text="Paid order"
             android:textColor="#000000"/>
 
     </RelativeLayout>

@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".PaidOrderActivity"></activity>
+        <activity android:name=".PayOrderActivity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".FlightInfoActivity" />
@@ -36,9 +38,12 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <receiver android:name=".BroadcastReceiver.AlarmReceiver" android:process=":newinst">
+
+        <receiver
+            android:name=".BroadcastReceiver.AlarmReceiver"
+            android:process=":newinst">
             <intent-filter>
-                <action android:name="com.sky.clicktoflight_RESEVATION_NOTIFICATION"/>
+                <action android:name="com.sky.clicktoflight_RESEVATION_NOTIFICATION" />
             </intent-filter>
         </receiver>
     </application>

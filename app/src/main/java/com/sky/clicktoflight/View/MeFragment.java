@@ -1,17 +1,13 @@
 package com.sky.clicktoflight.View;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.sky.clicktoflight.Constants;
 import com.sky.clicktoflight.LoginActivity;
+import com.sky.clicktoflight.PaidOrderActivity;
+import com.sky.clicktoflight.PayOrderActivity;
 import com.sky.clicktoflight.ProfileActivity;
 import com.sky.clicktoflight.R;
 import com.sky.clicktoflight.utils.CheckLoginStatus;
@@ -32,6 +30,8 @@ public class MeFragment extends Fragment {
     private CircleImageView mIvPhoto;
     private TextView mTvUsername;
     private TextView mTvUserId;
+    private TextView mTvPayOrder;
+    private TextView mTvPaidOrder;
 
     public MeFragment(String content) {
         this.content = content;
@@ -59,8 +59,38 @@ public class MeFragment extends Fragment {
         mTvUsername.setOnClickListener(profileOnClickListener);
         mTvUserId = view.findViewById(R.id.tv_userid);
         mTvUserId.setOnClickListener(profileOnClickListener);
+        mTvPayOrder = view.findViewById(R.id.tv_pay_order);
+        mTvPaidOrder = view.findViewById(R.id.tv_paid_order);
+        mTvPayOrder.setOnClickListener(orderOnclickListener);
+        mTvPaidOrder.setOnClickListener(orderOnclickListener);
+
 
     }
+    private View.OnClickListener orderOnclickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.tv_pay_order:
+                    if (Constants.LOGIN_STATUS){
+                        Intent intent = new Intent(view.getContext(), PayOrderActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                    break;
+                case R.id.tv_paid_order:
+                    if (Constants.LOGIN_STATUS){
+                        Intent intent = new Intent(view.getContext(), PaidOrderActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Intent intent = new Intent(view.getContext(), LoginActivity.class);
+                        startActivity(intent);
+                    }
+                    break;
+            }
+        }
+    };
     private View.OnClickListener profileOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

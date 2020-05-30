@@ -35,6 +35,12 @@ public interface IContract {
 
 //        void getPaidOrderList();
     }
+
+    interface IPresenterPaidOrder {
+
+
+        void getPaidOrderList();
+    }
     interface IView{
 
         void setRecycleview(List<FlightDataBean> flightDataBeansList);

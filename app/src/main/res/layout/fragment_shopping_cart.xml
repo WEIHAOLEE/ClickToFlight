@@ -23,7 +23,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_shopping"
+        android:id="@+id/rv_order"
         android:layout_below="@id/tb_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

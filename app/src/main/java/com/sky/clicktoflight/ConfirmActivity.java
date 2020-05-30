@@ -69,16 +69,6 @@ public class ConfirmActivity extends AppCompatActivity {
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 3000, pendingIntent);
                 Log.d(TAG, "设置alarmManager");
 
-                SharedPreferences sp = getSharedPreferences(Constants.USER_NAME + "Book", MODE_PRIVATE);
-                SharedPreferences.Editor edit = sp.edit();
-                edit.putString("arrAirport",arrAirport);
-                edit.putString("depAirport",depAirport);
-                edit.putString("arrTime",arrTime);
-                edit.putString("depTime",depTime);
-                edit.putString("flightNum",flightNum);
-                edit.putString("price",price);
-                edit.putString("seat",seat);
-                edit.commit();
 
 
             }

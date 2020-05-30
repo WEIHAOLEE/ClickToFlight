@@ -4,15 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.NumberPicker;
 import android.widget.ScrollView;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.gyf.immersionbar.ImmersionBar;
@@ -101,7 +96,7 @@ public class FlightInfoActivity extends AppCompatActivity implements View.OnClic
         mTvDepTime = findViewById(R.id.tv_dep_time);
         mTvFlightTime = findViewById(R.id.tv_flight_time);
         mTvArrTime = findViewById(R.id.tv_arr_time);
-        mTvDepAirport = findViewById(R.id.tv_dep_airport);
+        mTvDepAirport = findViewById(R.id.tv_seat);
         mTvArrAirport = findViewById(R.id.tv_arr_airport);
         mTvFlightNum = findViewById(R.id.tv_flight_num);
         mTvDepValue = findViewById(R.id.tv_dep_value);

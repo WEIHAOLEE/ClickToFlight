@@ -1,13 +1,11 @@
 package com.sky.clicktoflight.View;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sky.clicktoflight.Constants;
-import com.sky.clicktoflight.LoginActivity;
 import com.sky.clicktoflight.R;
 import com.sky.clicktoflight.utils.CheckLoginStatus;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
@@ -59,7 +56,7 @@ public class ShoppingCartFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        mRvShopping = view.findViewById(R.id.rv_shopping);
+        mRvShopping = view.findViewById(R.id.rv_order);
         mRvShopping.setLayoutManager(new LinearLayoutManager(view.getContext()));
         // 得到数据
     }

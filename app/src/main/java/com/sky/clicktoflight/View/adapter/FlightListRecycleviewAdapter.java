@@ -1,7 +1,6 @@
 package com.sky.clicktoflight.View.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -10,12 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sky.clicktoflight.Bean.FlightDataBean;
-import com.sky.clicktoflight.DIY.AwesomeTextView;
-import com.sky.clicktoflight.IContract;
 import com.sky.clicktoflight.Model.DAO.AirportDaoImpl;
-import com.sky.clicktoflight.Presenter.PresenterImpl;
 import com.sky.clicktoflight.R;
-import com.sky.clicktoflight.View.HomeFragment;
 
 import java.util.List;
 
@@ -83,7 +78,7 @@ public class FlightListRecycleviewAdapter extends RecyclerView.Adapter<FlightLis
             mTvFlightTime = itemView.findViewById(R.id.tv_flight_time);
             mTvArrTime = itemView.findViewById(R.id.tv_arr_time);
             mTvArrAirport = itemView.findViewById(R.id.tv_arr_airport);
-            mTvDepAirPort = itemView.findViewById(R.id.tv_dep_airport);
+            mTvDepAirPort = itemView.findViewById(R.id.tv_seat);
             mTvDepTime = itemView.findViewById(R.id.tv_dep_time);
             mTvFlightNum = itemView.findViewById(R.id.tv_flight_num);
             mTvOnTime = itemView.findViewById(R.id.tv_on_time);

@@ -1,6 +1,11 @@
 package com.sky.clicktoflight.utils;
 
+import android.annotation.SuppressLint;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -24,8 +29,20 @@ import okhttp3.ResponseBody;
 
 public class OkHttpRequest {
     private static final String TAG = OkHttpRequest.class.getName();
+    private static Handler mHandler;
 
+    @SuppressLint("HandlerLeak")
     public static void okHttpRequest(String requestType, final Callbacks callbacks) {
+
+        mHandler = new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                switch (msg.what){
+                    case 1:
+                        callbacks.ResponseList((List<BookDataBean>) msg.obj);
+                }
+            }
+        };
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(1000, TimeUnit.MILLISECONDS)
                 .build();
@@ -53,8 +70,10 @@ public class OkHttpRequest {
                 List<BookDataBean> list = null;
                 list = gson.fromJson(string,new TypeToken<List<BookDataBean>>(){}.getType());
                 Log.d(TAG,"response --> " + list);
-                callbacks.ResponseList(list);
-
+                Message message = mHandler.obtainMessage();
+                message.what = 1;
+                message.obj = list;
+                mHandler.sendMessage(message);
             }
         });
     }

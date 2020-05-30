@@ -16,9 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sky.clicktoflight.BroadcastReceiver.AlarmReceiver;
+import com.sky.clicktoflight.Presenter.PresenterAddOrderImpl;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
-public class ConfirmActivity extends AppCompatActivity {
+public class ConfirmActivity extends AppCompatActivity implements IContract.IViewAddOrder {
 
     private static final String TAG = ConfirmActivity.class.getName();
     private RelativeLayout rl;
@@ -69,8 +70,36 @@ public class ConfirmActivity extends AppCompatActivity {
                 alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 3000, pendingIntent);
                 Log.d(TAG, "设置alarmManager");
 
+                String[] flightCompanyArray = flightNum.split("\\d");
+                String[] flightNumberArray = flightNum.split("\\D");
+                String FlightNumber = "";
+                String FlightCompany = "";
+                for (String m : flightCompanyArray){
+                    FlightCompany += m;
+                }
+                for (String m : flightNumberArray){
+                    FlightNumber += m;
+                }
+                PresenterAddOrderImpl presenterAddOrder = new PresenterAddOrderImpl(ConfirmActivity.this,FlightNumber,FlightCompany,seat,"false");
+                presenterAddOrder.setOrder();
 
-
+            }
+        });
+        mBtBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] flightCompanyArray = flightNum.split("\\d");
+                String[] flightNumberArray = flightNum.split("\\D");
+                String FlightNumber = "";
+                String FlightCompany = "";
+                for (String m : flightCompanyArray){
+                    FlightCompany += m;
+                }
+                for (String m : flightNumberArray){
+                    FlightNumber += m;
+                }
+                PresenterAddOrderImpl presenterAddOrder = new PresenterAddOrderImpl(ConfirmActivity.this,FlightNumber,FlightCompany,seat,"true");
+                presenterAddOrder.setOrder();
             }
         });
     }
@@ -115,4 +144,10 @@ public class ConfirmActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void getResult(int result) {
+        if (result == 1){
+            finish();
+        }
+    }
 }

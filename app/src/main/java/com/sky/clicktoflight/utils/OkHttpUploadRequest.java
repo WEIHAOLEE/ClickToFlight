@@ -7,39 +7,33 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.sky.clicktoflight.Bean.BookDataBean;
-import com.sky.clicktoflight.Constants;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class OkHttpRequest {
-    private static final String TAG = OkHttpRequest.class.getName();
+public class OkHttpUploadRequest {
+    private static final String TAG = OkHttpUploadRequest.class.getName();
     private static Handler mHandler;
 
     @SuppressLint("HandlerLeak")
-    public static void okHttpRequest(String requestType, final Callbacks callbacks,RequestBody body) {
+    public static void okHttpRequest(String requestType, final Callbacks callbacks, RequestBody body) {
 
-        mHandler = new Handler(){
+        mHandler = new Handler() {
             @Override
             public void handleMessage(@NonNull Message msg) {
-                switch (msg.what){
+                switch (msg.what) {
                     case 1:
-                        callbacks.ResponseList((List<BookDataBean>) msg.obj);
+                        callbacks.Response((String) msg.obj);
                 }
             }
         };
@@ -56,27 +50,22 @@ public class OkHttpRequest {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d(TAG,"onFailure --> " + e.toString());
+                Log.d(TAG, "onFailure --> " + e.toString());
             }
 
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 ResponseBody responseBody = response.body();
                 String string = responseBody.string();
-                Gson gson = new Gson();
-                List<BookDataBean> list = null;
-                list = gson.fromJson(string,new TypeToken<List<BookDataBean>>(){}.getType());
-                Log.d(TAG,"response --> " + list);
                 Message message = mHandler.obtainMessage();
                 message.what = 1;
-                message.obj = list;
+                message.obj = string;
                 mHandler.sendMessage(message);
             }
         });
     }
     // callback
     public interface Callbacks{
-        void ResponseList(List<BookDataBean> list);
+        void Response(String response);
     }
-
 }

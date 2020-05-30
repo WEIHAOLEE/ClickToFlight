@@ -7,10 +7,14 @@ import android.os.Message;
 import androidx.annotation.NonNull;
 
 import com.sky.clicktoflight.Bean.BookDataBean;
+import com.sky.clicktoflight.Constants;
 import com.sky.clicktoflight.IContract;
 import com.sky.clicktoflight.utils.OkHttpRequest;
 
 import java.util.List;
+
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
 
 public class PresenterPayOrderImpl implements IContract.IPresenterPayOrder {
 
@@ -28,9 +32,13 @@ public class PresenterPayOrderImpl implements IContract.IPresenterPayOrder {
     public void getPayOrderList() {
         getRequest();
 
+
     }
 
     private void getRequest() {
+        RequestBody body = new FormBody.Builder()
+                .add("uid", String.valueOf(Constants.USER_ID))
+                .build();
         OkHttpRequest.okHttpRequest("pay", new OkHttpRequest.Callbacks() {
             @Override
             public void ResponseList(List<BookDataBean> list) {
@@ -39,7 +47,7 @@ public class PresenterPayOrderImpl implements IContract.IPresenterPayOrder {
 //                message.obj = list;
                 view.setRecyclerView(list);
             }
-        });
+        },body);
     }
 
 

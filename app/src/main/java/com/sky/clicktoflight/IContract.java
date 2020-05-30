@@ -41,6 +41,11 @@ public interface IContract {
 
         void getPaidOrderList();
     }
+
+    interface IPresenterAddOrder{
+
+        void setOrder();
+    }
     interface IView{
 
         void setRecycleview(List<FlightDataBean> flightDataBeansList);
@@ -66,6 +71,9 @@ public interface IContract {
 
     interface IViewPaidOrder{
         void setRecyclerView(List<BookDataBean> bookDataBeanList);
+    }
+    interface IViewAddOrder{
+        void getResult(int result);
     }
 
 

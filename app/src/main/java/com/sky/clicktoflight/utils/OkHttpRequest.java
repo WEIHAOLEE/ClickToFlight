@@ -1,13 +1,16 @@
-package com.sky.clicktoflight.Presenter;
+package com.sky.clicktoflight.utils;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.sky.clicktoflight.Bean.BookDataBean;
 import com.sky.clicktoflight.Constants;
-import com.sky.clicktoflight.IContract;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -19,22 +22,10 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class PresenterOrderImpl implements IContract.IPresenterOrder {
+public class OkHttpRequest {
+    private static final String TAG = OkHttpRequest.class.getName();
 
-
-    private static final String TAG = PresenterOrderImpl.class.getName();
-
-    @Override
-    public void getPayOrderList() {
-//        okHttpRequest();
-    }
-
-    @Override
-    public void getPaidOrderList() {
-
-    }
-
-    private void okHttpRequest(String requestType) {
+    public static void okHttpRequest(String requestType, final Callbacks callbacks) {
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(1000, TimeUnit.MILLISECONDS)
                 .build();
@@ -58,8 +49,18 @@ public class PresenterOrderImpl implements IContract.IPresenterOrder {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 ResponseBody responseBody = response.body();
                 String string = responseBody.string();
-                Log.d(TAG,"response --> " + string);
+                Gson gson = new Gson();
+                List<BookDataBean> list = null;
+                list = gson.fromJson(string,new TypeToken<List<BookDataBean>>(){}.getType());
+                Log.d(TAG,"response --> " + list);
+                callbacks.ResponseList(list);
+
             }
         });
     }
+    // callback
+    public interface Callbacks{
+        void ResponseList(List<BookDataBean> list);
+    }
+
 }

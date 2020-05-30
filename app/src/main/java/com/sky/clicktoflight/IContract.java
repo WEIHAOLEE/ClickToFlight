@@ -3,6 +3,7 @@ package com.sky.clicktoflight;
 import android.content.Context;
 import android.view.View;
 
+import com.sky.clicktoflight.Bean.BookDataBean;
 import com.sky.clicktoflight.Bean.FlightDataBean;
 
 import java.util.List;
@@ -28,11 +29,11 @@ public interface IContract {
     interface IPresenterLogin{
         void login(String uid, String uPwd);
     }
-    interface IPresenterOrder{
+    interface IPresenterPayOrder {
 
         void getPayOrderList();
 
-        void getPaidOrderList();
+//        void getPaidOrderList();
     }
     interface IView{
 
@@ -52,6 +53,16 @@ public interface IContract {
     interface IViewLogin{
         void saveUserData(String response);
     }
+
+    interface IViewPayOrder{
+        void setRecyclerView(List<BookDataBean> bookDataBeanList);
+    }
+
+    interface IViewPaidOrder{
+        void setRecyclerView(List<BookDataBean> bookDataBeanList);
+    }
+
+
     interface IModel{
 
     }

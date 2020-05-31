@@ -17,11 +17,19 @@ import java.util.List;
 public class PayOrderRecyclerViewAdapter extends RecyclerView.Adapter<PayOrderRecyclerViewAdapter.InnerHodler> {
 
     private final List<BookDataBean> mBookData;
+    private OnClickListner mOnClickListener;
 
     public PayOrderRecyclerViewAdapter(List<BookDataBean> mBookData) {
         this.mBookData = mBookData;
     }
 
+    public void setOnClickListener(OnClickListner onClickListener){
+        this.mOnClickListener = onClickListener;
+    }
+
+    public interface OnClickListner{
+        void onClick(int position, View v);
+    }
     @NonNull
     @Override
     public InnerHodler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -35,6 +43,7 @@ public class PayOrderRecyclerViewAdapter extends RecyclerView.Adapter<PayOrderRe
         holder.setData(mBookData.get(position));
     }
 
+
     @Override
     public int getItemCount() {
         if (mBookData != null) {
@@ -43,7 +52,7 @@ public class PayOrderRecyclerViewAdapter extends RecyclerView.Adapter<PayOrderRe
         return 0;
     }
 
-    public class InnerHodler extends RecyclerView.ViewHolder {
+    public class InnerHodler extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView mTvFlightNum;
         private final TextView mTvSeat;
@@ -67,6 +76,15 @@ public class PayOrderRecyclerViewAdapter extends RecyclerView.Adapter<PayOrderRe
             mTvBookId.setText(BID);
             mTvFlightNum.setText(FlightNum);
             mTvSeat.setText(Seat);
+            mBtBuy.setOnClickListener(this);
+            mBtCancel.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mOnClickListener != null) {
+                mOnClickListener.onClick(getAdapterPosition(),v);
+            }
         }
     }
 }

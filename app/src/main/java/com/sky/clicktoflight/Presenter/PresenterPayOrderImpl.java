@@ -10,6 +10,7 @@ import com.sky.clicktoflight.Bean.BookDataBean;
 import com.sky.clicktoflight.Constants;
 import com.sky.clicktoflight.IContract;
 import com.sky.clicktoflight.utils.OkHttpRequest;
+import com.sky.clicktoflight.utils.OkHttpUploadRequest;
 
 import java.util.List;
 
@@ -33,6 +34,30 @@ public class PresenterPayOrderImpl implements IContract.IPresenterPayOrder {
         getRequest();
 
 
+    }
+
+    @Override
+    public void update(int BID) {
+        getUploadRequest("updateBook",BID);
+    }
+
+    @Override
+    public void delete(int BID) {
+        getUploadRequest("cancelBook",BID);
+
+    }
+
+    private void getUploadRequest(String requestType, int BID) {
+        RequestBody body = new FormBody.Builder()
+                .add("bid", String.valueOf(BID))
+                .build();
+        OkHttpUploadRequest.okHttpRequest(requestType, new OkHttpUploadRequest.Callbacks() {
+            @Override
+            public void Response(String response) {
+                String replace = response.replaceAll("\r|\n", "");
+                view.getResult(Integer.parseInt(replace));
+            }
+        },body);
     }
 
     private void getRequest() {

@@ -7,13 +7,18 @@
     android:background="@color/background">
 
     <!--解决状态栏与toolbar重叠问题-->
-
+    <View
+        android:id="@+id/view_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#FFFFFF" />
 
     <FrameLayout
         android:id="@+id/fragment_content"
+        android:layout_below="@id/view_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/message">
+        android:layout_above="@id/bottomNavigationView">
     </FrameLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -26,15 +31,6 @@
         app:menu="@menu/bottom_nav_menu"/>
 
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="@string/title_home"
-        android:layout_above="@id/bottomNavigationView" />
 
 
 </RelativeLayout>

@@ -54,10 +54,25 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/rl_profile_shape"
         android:layout_marginTop="-45dp"
         android:background="@drawable/profile_main_shape">
+
+        <TextView
+            android:id="@+id/tv_about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/view_nav"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:textSize="12sp"
+            android:text="About us"/>
+        <View
+            android:id="@+id/view_nav"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 
@@ -100,12 +115,5 @@
 
 
 
-    <TextView
-        android:id="@+id/tv_fm"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="让👴做个测试"
-        android:textSize="30sp"
-        android:textColor="#000000"
-        android:gravity="center"/>
+
 </RelativeLayout>

@@ -18,7 +18,7 @@ import com.sky.clicktoflight.R;
 import com.sky.clicktoflight.utils.CheckLoginStatus;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
-public class ShoppingCartFragment extends Fragment {
+public class NotificationsFragment extends Fragment {
 
     private View view;
     private RecyclerView mRvShopping;
@@ -29,31 +29,19 @@ public class ShoppingCartFragment extends Fragment {
     private String flightNum;
     private String price;
     private String seat;
+    private ImmersionBarUtils immersionBarUtils;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+        view = inflater.inflate(R.layout.fragment_notification, container, false);
         initView();
         if (Constants.LOGIN_STATUS){
-            getSp();
-            setRecyclerView();
+
         }
         return view;
     }
 
-    private void getSp() {
-        // TODO：改成数据库操作
-        SharedPreferences sp = view.getContext().getSharedPreferences(Constants.USER_NAME+ "Book", Context.MODE_PRIVATE);
-        arrAirport = sp.getString("arrAirport", "");
-        depAirport = sp.getString("depAirport", "");
-        arrTime = sp.getString("arrTime", "");
-        depTime = sp.getString("depTime", "");
-        flightNum = sp.getString("flightNum", "");
-        price = sp.getString("price", "");
-        seat = sp.getString("seat", "");
-
-    }
 
     private void setRecyclerView() {
         mRvShopping = view.findViewById(R.id.rv_order);
@@ -62,17 +50,12 @@ public class ShoppingCartFragment extends Fragment {
     }
 
     private void initView() {
-        ImmersionBarUtils immersionBarUtils = new ImmersionBarUtils();
+        immersionBarUtils = new ImmersionBarUtils();
         immersionBarUtils.ImmersionBarUtilFragment(this,R.id.view_bar);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (!Constants.LOGIN_STATUS){
-            CheckLoginStatus checkLoginStatus = new CheckLoginStatus(getActivity());
-            // 检查是否登录 并设置常量
-            checkLoginStatus.getSharedPreferences();
-        }
     }
 }

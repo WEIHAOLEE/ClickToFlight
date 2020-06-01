@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
+import com.sky.clicktoflight.AboutActivity;
 import com.sky.clicktoflight.Constants;
 import com.sky.clicktoflight.LoginActivity;
 import com.sky.clicktoflight.PaidOrderActivity;
@@ -32,10 +33,8 @@ public class MeFragment extends Fragment {
     private TextView mTvUserId;
     private TextView mTvPayOrder;
     private TextView mTvPaidOrder;
+    private TextView mTvAbout;
 
-    public MeFragment(String content) {
-        this.content = content;
-    }
 
     @Nullable
     @Override
@@ -49,8 +48,6 @@ public class MeFragment extends Fragment {
     }
 
     private void initView() {
-        TextView tv_fm = view.findViewById(R.id.tv_fm);
-        tv_fm.setText(content);
         ImmersionBarUtils immersionBarUtils = new ImmersionBarUtils();
         immersionBarUtils.ImmersionBarUtilFragment(this,R.id.view_bar);
         mIvPhoto = view.findViewById(R.id.iv_pf_photo);
@@ -63,6 +60,14 @@ public class MeFragment extends Fragment {
         mTvPaidOrder = view.findViewById(R.id.tv_paid_order);
         mTvPayOrder.setOnClickListener(orderOnclickListener);
         mTvPaidOrder.setOnClickListener(orderOnclickListener);
+        mTvAbout = view.findViewById(R.id.tv_about);
+        mTvAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), AboutActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

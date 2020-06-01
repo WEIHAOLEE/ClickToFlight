@@ -1,34 +1,24 @@
 package com.sky.clicktoflight;
 
-import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sky.clicktoflight.View.HomeFragment;
 import com.sky.clicktoflight.View.MeFragment;
-import com.sky.clicktoflight.View.ShoppingCartFragment;
+import com.sky.clicktoflight.View.NotificationsFragment;
 import com.sky.clicktoflight.utils.CheckLoginStatus;
 import com.sky.clicktoflight.utils.ImmersionBarUtils;
 
 public class MainActivity extends AppCompatActivity {
 
 
-    private TextView mTextMessage;
 
 
     // fragement
@@ -45,20 +35,22 @@ public class MainActivity extends AppCompatActivity {
             hideFragment(transaction);
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
 //                    homeFragment = new HomeFragment();
 //                    transaction.add(R.id.fragment_content,homeFragment);
                     transaction.show(homeFragment);
                     transaction.commit();
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    getSupportFragmentManager().beginTransaction().hide(meFragment).commit();
+                    if (notificationsFragment == null){
+                        notificationsFragment = new NotificationsFragment();
+                        transaction.add(R.id.fragment_content,notificationsFragment);
+                    }
+                    transaction.show(notificationsFragment);
+                    transaction.commit();
                     return true;
                 case R.id.navigation_me:
-                    mTextMessage.setText(R.string.title_me);
                     if (meFragment == null){
-                        meFragment = new MeFragment("👴成功了");
+                        meFragment = new MeFragment();
                         transaction.add(R.id.fragment_content,meFragment);
                     }
                     transaction.show(meFragment);
@@ -73,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private HomeFragment homeFragment;
-    private ShoppingCartFragment shoppingCartFragment;
+    private NotificationsFragment notificationsFragment;
 
 
     @Override
@@ -84,10 +76,11 @@ public class MainActivity extends AppCompatActivity {
 //        setSupportActionBar(tb_1);
 //
 
+        ImmersionBarUtils immersionBarUtils = new ImmersionBarUtils();
+        immersionBarUtils.ImmersionBarUtilActivity(this,R.id.view_bar);
 
 //        getWindow().setNavigationBarColor(Color.TRANSPARENT);
         BottomNavigationView navView = findViewById(R.id.bottomNavigationView);
-        mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         setDefaultFragment();
@@ -115,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
         }
         if (homeFragment != null){
             transaction.hide(homeFragment);
+        }
+        if (notificationsFragment != null) {
+            transaction.hide(notificationsFragment);
         }
 //        if (mUserPageFragment != null){
 //            transaction.hide(mUserPageFragment);

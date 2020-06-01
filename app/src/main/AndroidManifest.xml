@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PaidOrderActivity"></activity>
+        <activity android:name=".OpenSourceActivity"></activity>
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".PaidOrderActivity" />
         <activity android:name=".PayOrderActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".RegisterActivity" />
